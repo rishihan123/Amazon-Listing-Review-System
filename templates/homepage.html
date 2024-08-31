@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <style>
+            body { 
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                min-width: 1400px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .main-heading {
+                font-size: 60px;
+                text-align: center;
+                margin-top: 100px;
+                margin-right: 30px;
+            }
+
+            .topnav {
+                overflow: hidden;
+                background-color: #707070;
+                width: 100%;
+                top: 0;
+                padding: 10px 10px; 
+                position: absolute;
+                text-align: center; 
+            }
+
+            .topnav a {
+                display: inline-block; 
+                color: white;
+                background-color: black; 
+                text-align: center;
+                padding: 10px 20px; 
+                text-decoration: none;
+                font-size: 20px; 
+                line-height: 25px;
+                border-radius: 4px;
+                transition: background-color 0.3s ease; 
+            }
+
+            .topnav a:hover {
+                background-color: #555; /* Change background color on hover */
+                color: white; /* Ensure text color stays white on hover */
+            }
+
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                overflow: hidden;
+                padding: 40px 10px;
+                background-color: #707070;
+            }
+
+            .footer a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 10px 275px;
+                text-decoration: none;
+                font-size: 18px;
+                line-height: 25px;
+                border-radius: 4px;
+            }
+
+            .search-container {
+                text-align: center;
+                margin-top: 50px;
+            }
+
+            .search-container input[type=text]{
+                padding: 10px;
+                font-size: 16px;
+                border: 2px solid #ccc;
+                border-radius: 4px;
+                width: 700px;
+            }
+
+            .search-container button {
+                padding: 10px 20px;
+                font-size: 16px;
+                background-color: dodgerblue;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 10px; /* Add some space between input and button */
+            }
+
+            .search-container button:hover {
+                background-color: #555;
+            }
+
+            .image-container {
+                text-align: center;
+                margin-bottom: 50px; /* Add margin below the image */
+            }
+
+            .image-container img {
+                width: 250px; /* Adjust image width as needed */
+                height: 250px;
+            }
+
+        </style>
+        <title>
+            Amazon Listing Review
+        </title>
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="home"><b>Home</b></a>
+        </div>
+
+        <div class="footer">
+            <a style="font-size: 40px;"><b>Made by Rishi Handa</b></a>
+        </div>
+
+        <h1 class="main-heading"><b>Amazon Listing Review System</b></h1>
+
+        <h3 class="main-heading" style="font-size: 30px; margin-top: 20px;">
+            Please copy and paste the amazon url into the search box and a summary of the listing will be generated
+        </h3>
+
+        <div class="search-container">
+            <form action="product" method="post">
+                <input type="text" placeholder="Enter Amazon URL..." name="url">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        {%if error%}
+            <h3 class="main-heading" style="font-size: 20px; margin-top: 20px; margin-bottom: 0px; color: red;">
+                 {{error}}
+            </h3>
+        {%endif%}
+
+        <div class="image-container">
+            <a href="www.amazon.co.uk">
+                <img src="https://cdn4.iconfinder.com/data/icons/flat-brand-logo-2/512/amazon-512.png">
+            </a>
+        </div>
+       
+    </body>
+</html>

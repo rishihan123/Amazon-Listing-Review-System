@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Summary</title>
+    <style>
+        body { 
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 60px; /* To prevent content from hiding behind the fixed nav bar */
+        }
+        .topnav {
+            overflow: hidden;
+            background-color: #707070;
+            width: 100%;
+            top: 0;
+            padding: 10px 0;
+            position: fixed; /* Fixed positioning */
+            text-align: center; 
+            z-index: 1000; /* Ensure the nav bar stays on top */
+        }
+
+        .topnav a {
+            display: inline-block; 
+            color: white;
+            background-color: black; 
+            text-align: center;
+            padding: 10px 20px; 
+            text-decoration: none;
+            font-size: 20px; 
+            line-height: 25px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease; 
+        }
+
+        .topnav a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .main-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 80px 30px 30px; /* Padding adjusted to account for fixed nav bar */
+        }
+
+        .text-content {
+            max-width: 70%; /* Increase the width of the text area */
+        }
+
+        .main-heading {
+            font-size: 50px; /* Increase the font size */
+            margin: 0;
+        }
+
+        .rating {
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .product-image {
+            max-width: 25%; /* Adjust the image width */
+            margin-left: 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .product-info {
+            flex: 1;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .wordcloud, .piechart, .histogram, .barchart {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 auto; /* Center the image */
+        }
+        .description {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a href="{{ url_for('home') }}">Home</a>
+    </div>
+    <div class="container">
+        <div class="product-info">
+            <h1>{{ name }}</h1>
+            <p class="rating">Rating: {{ rating }}</p>
+            <img src="{{ imageLink }}" alt="Product Image" style="max-width: 100%; height: auto;">
+            
+            {% if wordcloud_url %}
+                <h2 style="text-align: center;">Word Cloud</h2>
+                <img src="{{ url_for('static', filename=wordcloud_url) }}" alt="Word Cloud" class="wordcloud">
+                <div class="description">
+                    <p>The word cloud above represents the most frequently mentioned words in the reviews of this product based off the data we have been able to scrape. Larger words appear more frequently in the reviews, giving you a visual sense of the key topics discussed by customers.</p>
+                </div>
+            {% endif %}
+
+            {% if piechart_url %}
+                <h2>Review Classification Pie Chart</h2>
+                <img src="{{ url_for('static', filename=piechart_url) }}" alt="Review Classification Pie Chart" class="piechart">
+                <div class="description">
+                    <p>The pie chart above shows the classification of reviews based on sentiment. It visually represents the proportion of satisfied, unsatisfied, and neutral reviews based on the data we have been able to scrape.</p>
+                </div>
+            {% endif %}
+
+            {% if histogram_url %}
+                <h2>Review Length Histogram</h2>
+                <img src="{{ url_for('static', filename=histogram_url) }}" alt="Review Length Histogram" class="histogram">
+                <div class="description">
+                    <p>The histogram illustrates the distribution of review lengths across the dataset. Each bar represents a range of review lengths, with the height showing the number of reviews that fall into each length range. This visualization helps to understand the variability in review length, indicating whether most reviews are short, medium, or long, and can highlight trends in how detailed customers are when sharing their feedback.</p>
+                </div>
+            {% endif %}
+
+            {% if barchart_url %}
+                <h2>Word Frequency Barchart</h2>
+                <img src="{{ url_for('static', filename=barchart_url) }}" alt="Word Frequency Barchart" class="barchart">
+                <div class="description">
+                    <p>The bar chart displays the top 15 most frequent words found in the reviews. Each bar represents a word, with the height indicating its frequency of occurrence. This visualization helps identify common terms used in the reviews, providing insights into key themes and frequently mentioned aspects of the product This is a different representation of the wordcloud.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
